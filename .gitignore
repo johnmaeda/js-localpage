@@ -140,3 +140,7 @@ dist
 
 # Local/demo video sandbox
 tools/demo-video/
+
+# Agent skills (installed on-demand, not tracked)
+.agents/
+skills-lock.json

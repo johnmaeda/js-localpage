@@ -259,10 +259,7 @@ npm run video:render     # Outputs to tools/demo-video/out/localpage-demo.mp4
 
 ### Repo hygiene
 
-`tools/demo-video/` is in `.gitignore` — it's disposable local tooling. The only tracked files related to video are:
-
-- `.agents/skills/remotion-best-practices/` — skill reference docs
-- `skills-lock.json` — skill lockfile
+`tools/demo-video/` is in `.gitignore` — it's disposable local tooling. The Remotion skill (`npx skills add remotion-dev/skills`) is installed on-demand and not tracked in the repo.
 
 ### Copilot CLI prompt
 
