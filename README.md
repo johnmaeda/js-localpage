@@ -5,8 +5,7 @@
 Local-first CLI tool that turns authenticated Microsoft Edge pages into high-quality Markdown, then optionally interprets them with a local Ollama model.
 
 ```text
-Sensitive browser content stays local.
-No cloud scraping. No Chrome extension. No remote LLM.
+Sensitive browser content stays local. No Chrome extension. No remote LLM. No tool-calling — the model is inert.
 ```
 
 ## Privacy by Design
