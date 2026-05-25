@@ -177,6 +177,10 @@ Config lives at `~/.localpage/config.json`. Defaults:
 - No page content is ever transmitted off-device
 - LLM processing runs exclusively on localhost (Ollama)
 
+### Inert model — no tool calling or agentic behavior
+
+The local LLM is used strictly as a text-in → text-out generator. There is no function calling, tool use, structured output parsing, or agentic loop. Ollama receives a plain text prompt and returns a plain text response — it cannot execute code, make network requests, read files, or take actions on your behalf. The model is rendered completely inert by design.
+
 ### Dependency Audit
 
 This tool uses open-source npm packages. To verify no known vulnerabilities exist:
