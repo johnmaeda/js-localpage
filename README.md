@@ -9,8 +9,6 @@ Sensitive browser content stays local.
 No cloud scraping. No Chrome extension. No remote LLM.
 ```
 
-![](LocalPageDemo.mp4)
-
 ## Privacy by Design
 
 This tool was written from the ground up to **never call external LLM APIs or cloud services**. Everything runs locally on your machine:
@@ -24,6 +22,8 @@ This tool was written from the ground up to **never call external LLM APIs or cl
 The code contains explicit policy enforcement (`src/security/policy.ts`) that warns if any configuration would send data off-machine. The default config has `"remoteProcessing": false` and cannot be changed without deliberate user action.
 
 **Why this matters:** If you capture authenticated pages (dashboards, internal tools, private docs), that content may contain credentials, PII, proprietary data, or session tokens. LocalPage ensures none of this ever leaves your machine, gets swept into a git repo, or is accidentally copied to a cloud service.
+
+![](LocalPageDemo.gif)
 
 ## Install
 
