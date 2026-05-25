@@ -9,6 +9,8 @@ Sensitive browser content stays local.
 No cloud scraping. No Chrome extension. No remote LLM.
 ```
 
+![](LocalPageDemo.mp4)
+
 ## Privacy by Design
 
 This tool was written from the ground up to **never call external LLM APIs or cloud services**. Everything runs locally on your machine:
@@ -258,3 +260,54 @@ npm run video:render     # Outputs to tools/demo-video/out/localpage-demo.mp4
 
 - `.agents/skills/remotion-best-practices/` — skill reference docs
 - `skills-lock.json` — skill lockfile
+
+### Copilot CLI prompt
+
+Paste this into GitHub Copilot CLI from your repo root to have it build the entire demo video automatically:
+
+```text
+Set up a safe Remotion demo-video sandbox for this repo.
+
+Goal:
+Create a 45-second product demo video using the Remotion skill, without polluting or restructuring the existing repo.
+
+Hard constraints:
+- Do not modify application source code.
+- Do not modify root package.json.
+- Do not modify root lockfiles.
+- Do not install dependencies at the repo root.
+- Do not use external APIs, API keys, cloud rendering, telemetry, paid services, TTS, or generated media services.
+- All demo-video files must live only under ./tools/demo-video.
+- Add ./tools/demo-video/ to .gitignore so generated video work stays untracked.
+- The only intended tracked changes should be:
+  1. .gitignore
+  2. .agents/skills/remotion/ or related Remotion skill files, if added
+
+Steps:
+1. Check current git status.
+2. Create a branch named remotion-demo-sandbox if not already on one.
+3. Add tools/demo-video/ to .gitignore.
+4. Install the Remotion skill using: npx skills add remotion-dev/skills
+5. Verify what files changed.
+6. Create an isolated Remotion project only inside ./tools/demo-video.
+7. Read README.md and package.json only to understand the repo's product story.
+8. Create a 45-second demo with:
+   - title card
+   - problem
+   - how this repo helps
+   - three feature moments
+   - closing CTA
+9. Use simple geometric motion, captions, and local assets only.
+10. Add scripts only to ./tools/demo-video/package.json:
+    - video:preview
+    - video:render
+11. Output rendered files only to ./tools/demo-video/out.
+12. At the end, run git status and explain:
+    - what is tracked
+    - what is ignored
+    - how to preview
+    - how to render
+
+Important:
+Keep the repo clean. Treat ./tools/demo-video as disposable local tooling.
+```
