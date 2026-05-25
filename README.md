@@ -197,3 +197,64 @@ Run this periodically, especially after `npm install` or `npm update`. If vulner
 - Review audit results before deploying in sensitive environments
 - The `~/.localpage/` directory contains sensitive data (browser sessions, page captures) — protect it with appropriate file permissions
 - Consider running `chmod 700 ~/.localpage` to restrict access to your user only
+
+## Demo Video
+
+Create a product demo video using [Remotion](https://remotion.dev) without polluting the main repo. Everything lives in `tools/demo-video/` which is gitignored.
+
+### First-time setup
+
+```bash
+# 1. Install the Remotion skill (agent best-practices for video creation)
+npx skills add remotion-dev/skills
+
+# 2. Create the sandbox directory
+mkdir -p tools/demo-video
+cd tools/demo-video
+
+# 3. Scaffold a blank Remotion project
+npx create-video@latest --yes --blank --no-tailwind .
+
+# 4. Add transitions support
+npm install @remotion/transitions
+
+# 5. Create src/index.ts entrypoint (required by Remotion)
+cat > src/index.ts << 'EOF'
+import { registerRoot } from "remotion";
+import { RemotionRoot } from "./Root";
+registerRoot(RemotionRoot);
+EOF
+
+# 6. Add convenience scripts to package.json
+npm pkg set scripts.video:preview="remotion studio"
+npm pkg set scripts.video:render="remotion render LocalPageDemo --output out/localpage-demo.mp4"
+```
+
+### Preview
+
+```bash
+cd tools/demo-video
+npm run video:preview    # Opens Remotion Studio at localhost:3000
+```
+
+### Render
+
+```bash
+cd tools/demo-video
+npm run video:render     # Outputs to tools/demo-video/out/localpage-demo.mp4
+```
+
+### Design notes
+
+- All scenes use `interpolate()` + `Easing.bezier()` for motion (no CSS animations)
+- Use `<TransitionSeries>` with `fade()` between scenes
+- Define composition in `src/Root.tsx` (fps, dimensions, duration)
+- Keep styling minimal: Helvetica Neue, charcoal + one accent color
+- Place any local assets in `public/`, reference with `staticFile()`
+
+### Repo hygiene
+
+`tools/demo-video/` is in `.gitignore` — it's disposable local tooling. The only tracked files related to video are:
+
+- `.agents/skills/remotion-best-practices/` — skill reference docs
+- `skills-lock.json` — skill lockfile
