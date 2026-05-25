@@ -202,7 +202,7 @@ Run this periodically, especially after `npm install` or `npm update`. If vulner
 
 ## Demo Video
 
-Create a product demo video using [Remotion](https://remotion.dev) without polluting the main repo. Everything lives in `tools/demo-video/` which is gitignored. [This video](LocalPageDemo.mp4) was one of the results of that process.
+Create a product demo video using [Remotion](https://remotion.dev) without polluting the main repo. Everything lives in `tools/demo-video/` which is gitignored. [This video](LocalPageDemo.gif) was one of the results of that process.
 
 ### First-time setup
 
