@@ -137,3 +137,6 @@ dist
 
 # MacOS related
 .DS_Store
+
+# Local/demo video sandbox
+tools/demo-video/
