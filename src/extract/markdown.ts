@@ -43,16 +43,30 @@ function createTurndownService(): TurndownService {
 export function htmlToMarkdown(html: string, url: string): string {
   // Try Readability first for best content extraction
   const readable = extractReadable(html, url);
+  // Always get cleaned full DOM as baseline
+  const fullClean = cleanDom(html, { removeNav: true });
 
   let sourceHtml: string;
   let title: string;
 
   if (readable && readable.content.length > 100) {
-    sourceHtml = readable.content;
-    title = readable.title;
+    // Use Readability only if it captured most of the visible content.
+    // If the full cleaned DOM is significantly larger, Readability likely
+    // missed sections (common on dashboards, multi-section pages).
+    const readableTextLen = readable.textContent.length;
+    const fullTextLen = fullClean.replace(/<[^>]+>/g, "").length;
+
+    if (readableTextLen >= fullTextLen * 0.6) {
+      sourceHtml = readable.content;
+      title = readable.title;
+    } else {
+      // Readability missed too much content — use full DOM
+      sourceHtml = fullClean;
+      title = readable.title;
+    }
   } else {
     // Fallback to cleaned full DOM
-    sourceHtml = cleanDom(html, { removeNav: true });
+    sourceHtml = fullClean;
     title = "";
 
     // Try to extract title from HTML
